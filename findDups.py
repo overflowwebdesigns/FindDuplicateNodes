@@ -4,7 +4,7 @@ from gooey import Gooey, GooeyParser
 import argparse
 
 @Gooey(program_name="Find Duplicates in SVG", 
-       default_size=(600, 400), 
+       default_size=(1024, 800), 
       )
 
 def main():
@@ -24,6 +24,7 @@ def main():
 
         # Output the results
         if results:
+            print("=============================================================")
             print("Duplicate points found:")
             for result in results:
                 print(f"Path ID: {result['id']}")
