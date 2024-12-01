@@ -65,5 +65,7 @@ if __name__ == "__main__":
         print("Duplicate points found:")
         for result in results:
             print(f"Path ID: {result['id']}")
+            input("Press any key to exit.")
     else:
         print("No duplicate points found.")
+        input("Press any key to exit.")
