@@ -1,5 +1,34 @@
 import re
 from xml.etree import ElementTree as ET
+from gooey import Gooey, GooeyParser
+import argparse
+
+@Gooey(program_name="Find Duplicates in SVG", 
+       default_size=(600, 400), 
+      )
+
+def main():
+    # Main function to accept an SVG file
+    if __name__ == "__main__":
+        parser = GooeyParser(description="Select a file to process")
+        parser.add_argument(
+            'input_file',
+            metavar='Input File',
+            help='Select the file to be processed',
+            widget='FileChooser'
+        )
+        file_path = parser.parse_args()
+
+        # Identify duplicates
+        results = parse_svg_file_for_duplicates(file_path.input_file)
+
+        # Output the results
+        if results:
+            print("Duplicate points found:")
+            for result in results:
+                print(f"Path ID: {result['id']}")
+        else:
+            print("No duplicate points found.")
 
 def parse_svg_file_for_duplicates(file_path):
     """
@@ -52,20 +81,5 @@ def find_duplicates_in_d(d_attribute):
 
     return duplicates
 
-# Main function to accept an SVG file
 if __name__ == "__main__":
-    # Prompt user for the file path
-    file_path = input("Enter the path to the SVG file: ").strip()
-
-    # Identify duplicates
-    results = parse_svg_file_for_duplicates(file_path)
-
-    # Output the results
-    if results:
-        print("Duplicate points found:")
-        for result in results:
-            print(f"Path ID: {result['id']}")
-            input("Press any key to exit.")
-    else:
-        print("No duplicate points found.")
-        input("Press any key to exit.")
+    main()
